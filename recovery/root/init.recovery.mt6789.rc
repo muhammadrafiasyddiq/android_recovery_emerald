@@ -32,19 +32,6 @@ on post-fs
     symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_ufs_a
     symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_ufs_b
     
-on boot
-    chown system system /dev/xiaomi-touch
-    chmod 0664 /dev/xiaomi-touch
-    chown system system /sys/class/touch/tp_dev/fod_status
-    chmod 0664 /sys/class/touch/tp_dev/fod_status
-
-service touchfeature-hal-1-0 /vendor/bin/hw/vendor.xiaomi.hardware.touchfeature@1.0-service
-    class main
-    user root
-    group root
-    onrestart restart touchfeature-hal-1-0
-    seclabel u:r:recovery:s0
-    
     
 service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     class main
@@ -72,34 +59,41 @@ service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     
     
 on property:hwservicemanager.ready=true
-    start teei_daemon
+    start miteelog
+    start tee-supplicant
     start gatekeeper-1-0
     start keymint-beanpod
     start keymaster
     
     
 on property:vendor.sys.listener.registered=true
-    start teei_daemon
+    start miteelog
+    start tee-supplicant
     start gatekeeper-1-0
     start keymint-beanpod
     start keymaster
    
 on property:ro.crypto.state=unsupported
-    stop teei_daemon
+    stop miteelog
+    stop tee-supplicant
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop keymaster-4-1
+    
 on property:ro.crypto.state=unencrypted
-    stop teei_daemon
+    stop miteelog
+    stop tee-supplicant
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop keymaster
     
 on property:twrp.all.users.decrypted=true
-    stop teei_daemon
+    stop miteelog
+    stop tee-supplicant
     stop keymint-beanpod
     stop gatekeeper-1-0
     stop keymaster
+    
 on boot
     start health-hal-2-1
     start vendor.vibrator-default
