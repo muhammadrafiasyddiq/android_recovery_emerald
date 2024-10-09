@@ -1,4 +1,5 @@
 import /init.microtrust.rc
+import /vibrator.rc
 
 on init
     # Create a more standard /dev/block layout for our scripts
@@ -31,6 +32,7 @@ on post-fs
     symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_emmc_b
     symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_ufs_a
     symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_ufs_b
+    start vibratorfeature-hal-service
     
     on early-init
     insmod /lib/modules/xiaomi.ko
@@ -38,6 +40,7 @@ on post-fs
     insmod /lib/modules/ft3683g.ko
     insmod /lib/modules/flashlight.ko
     insmod /lib/modules/flashlights-mt6789.ko
+    insmod /lib/modules/haptic.ko
     
 service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     class main
@@ -62,8 +65,7 @@ service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     group root
     disabled
     seclabel u:r:recovery:s0
-    
-    
+        
 on property:hwservicemanager.ready=true
     start miteelog
     start tee-supplicant

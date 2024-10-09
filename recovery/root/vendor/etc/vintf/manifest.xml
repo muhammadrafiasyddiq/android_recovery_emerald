@@ -824,6 +824,10 @@
         </interface>
         <fqname>@1.3::ISupplicant/default</fqname>
     </hal>
+        <hal format="aidl" override="true">
+        <name>android.hardware.vibrator</name>
+        <fqname>IVibrator/vibratorfeature</fqname>
+    </hal>
     <sepolicy>
         <version>31.0</version>
     </sepolicy>
