@@ -38,6 +38,7 @@ on post-fs
     insmod /lib/modules/xiaomi.ko
     insmod /lib/modules/switch_class.ko
     insmod /lib/modules/ft3683g.ko
+    insmod /lib/modules/gt9916.ko
     insmod /lib/modules/flashlight.ko
     insmod /lib/modules/flashlights-mt6789.ko
     insmod /lib/modules/haptic.ko
