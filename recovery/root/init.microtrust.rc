@@ -29,7 +29,7 @@ on fs
 
 #    enable vendor.keymaster-4-0-mitee
 
-    enable vendor.keymint-mitee
+    
 
     mkdir /mnt/vendor/persist/data 0755 system system
     mkdir /mnt/vendor/persist/fdsd 0755 system system
@@ -55,4 +55,3 @@ on post-fs-data
     chmod 0755 /data/vendor/thh
     chown system system /data/vendor/thh
     write /proc/bootprof "init miteelog"
-    start miteelog

@@ -32,7 +32,6 @@ on post-fs
     symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_emmc_b
     symlink /dev/block/platform/bootdevice/by-name/preloader_a /dev/block/platform/bootdevice/by-name/preloader_ufs_a
     symlink /dev/block/platform/bootdevice/by-name/preloader_b /dev/block/platform/bootdevice/by-name/preloader_ufs_b
-    start vibratorfeature-hal-service
     
     on early-init
     insmod /lib/modules/xiaomi.ko
@@ -105,5 +104,5 @@ on property:twrp.all.users.decrypted=true
     
 on boot
     start health-hal-2-1
-    start vendor.vibrator-default
+    start vibratorfeature-hal-service
     setprop sys.usb.config adb
